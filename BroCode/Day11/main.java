@@ -1,9 +1,12 @@
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class main {
+    static int balance = 5000; 
+
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
+        // LOGIN FRAME
+        JFrame frame = new JFrame("ATM Login");
         frame.setSize(400, 400);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -14,13 +17,14 @@ public class main {
         JPasswordField pin = new JPasswordField();
         pin.setBounds(100, 100, 200, 30);
 
-        JButton button1 = new JButton("Click Me");
+        JButton button1 = new JButton("Login");
         button1.setBounds(150, 150, 100, 40);
 
         frame.add(label1);
         frame.add(pin);
         frame.add(button1);
 
+        // BUTTON ACTION: Check PIN
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -28,6 +32,8 @@ public class main {
 
                 if (enteredPin.equals("12345")) {
                     JOptionPane.showMessageDialog(frame, "PIN correct! Access granted.");
+                    frame.dispose(); // Close login window
+                    openATMWindow(); // Open ATM main window
                 } else {
                     JOptionPane.showMessageDialog(frame, "Incorrect PIN! Try again.");
                 }
@@ -35,5 +41,21 @@ public class main {
         });
 
         frame.setVisible(true);
+    }
+
+   
+    public static void openATMWindow() {
+        JFrame atmFrame = new JFrame("ATM System");
+        atmFrame.setSize(400, 400);
+        atmFrame.setLayout(null);
+        atmFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // You can add ATM features like buttons here
+        JLabel welcomeLabel = new JLabel("Welcome to ATM!");
+        welcomeLabel.setBounds(120, 30, 200, 30);
+
+        atmFrame.add(welcomeLabel);
+
+        atmFrame.setVisible(true);
     }
 }
